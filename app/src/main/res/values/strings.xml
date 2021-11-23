@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TwitterApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="twitterIcon">twitterIcon</string>
+    <string name="twitter_search">Twitter Search</string>
+</resources>
