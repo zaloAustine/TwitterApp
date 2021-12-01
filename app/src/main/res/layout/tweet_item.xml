@@ -18,6 +18,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="8dp"
+        android:textColor="@color/black"
         android:fontFamily="@font/work_sans"
         app:layout_constraintBottom_toTopOf="@+id/btnAddToRecent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -7,7 +7,7 @@
     <string name="search">search</string>
     <string name="search_tweets">Search Tweets</string>
     <string name="recent_added_tweets">recent added tweets will appear here</string>
-    <string name="clear_recent">Clear Recent</string>
+    <string name="clear_recent">Clear All</string>
     <string name="search_desc">getting tweets please wait...</string>
     <string name="recent_tweets_title">Recent Tweets</string>
     <string name="add_to_recent">add to recent</string>

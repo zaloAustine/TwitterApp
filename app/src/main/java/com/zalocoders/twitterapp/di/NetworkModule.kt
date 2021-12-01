@@ -3,6 +3,7 @@ package com.zalocoders.twitterapp.di
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import com.zalocoders.twitterapp.BuildConfig
 import com.zalocoders.twitterapp.data.api.ApiService
 import com.zalocoders.twitterapp.utils.loggingInterceptor
 import dagger.Module
@@ -37,7 +38,7 @@ object NetworkModule {
                     val request = chain.request()
                     val authRequest = request.newBuilder()
                             .header("Content-Type", "application/json")
-                            .header("Authorization", "Bearer AAAAAAAAAAAAAAAAAAAAAG1fWAEAAAAAHcOKvBVtJVASmxmaFlRvDqNYDhU%3DBMvmmtB2efRlUUJ8hekrPWIraGRRWr3hbdQHAnVjn9tT6FDDxO")
+                            .header("Authorization", "Bearer ${BuildConfig.TWITTER_BEARER_TOKEN}")
                             .build()
                     return@addInterceptor chain.proceed(authRequest)
                 }

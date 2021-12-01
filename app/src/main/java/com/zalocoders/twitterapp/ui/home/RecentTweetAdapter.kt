@@ -21,7 +21,7 @@ class RecentTweetAdapter(private val recentTweetClickListener: RecentTweetClickL
 			tweetText.text = item.tweet_desc
 			}
 			
-			binding.tweetText.setOnClickListener {
+			binding.deleteRecentTweet.setOnClickListener {
 				recentTweetClickListener.deleteTweet(item.tweet_id)
 			}
 		}
