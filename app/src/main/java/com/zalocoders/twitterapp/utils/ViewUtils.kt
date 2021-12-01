@@ -100,10 +100,6 @@ fun Fragment.hideSoftInput(){
     inputmethodManager.hideSoftInputFromWindow(view?.windowToken, 0)
 }
 
-fun Activity.hideSoftInput() {
-    val inputmethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-    inputmethodManager.hideSoftInputFromWindow(getView().windowToken, 0)
-}
 
 fun Activity.getView(): View {
     return window.decorView.rootView

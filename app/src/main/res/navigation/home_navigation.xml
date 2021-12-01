@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.zalocoders.twitterapp.ui.home.HomeFragment"
-        android:label="fragment_search"
+        android:label="Search"
         tools:layout="@layout/fragment_search" >
         <action
             android:id="@+id/action_searchFragment_to_resultFragment"
@@ -18,7 +18,7 @@
     <fragment
         android:id="@+id/resultFragment"
         android:name="com.zalocoders.twitterapp.ui.search_results.ResultFragment"
-        android:label="fragment_result"
+        android:label="Results"
         tools:layout="@layout/fragment_result" >
 
         <argument app:argType="string"

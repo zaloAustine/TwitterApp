@@ -44,7 +44,12 @@ class HomeFragment : Fragment() {
 	
 	private fun setUpSearch(){
 		
-		binding.searchView.isIconified = true
+		binding.searchView.isIconified = false
+		hideSoftInput()
+		
+		binding.searchView.setOnClickListener{
+			binding.searchView.onActionViewExpanded()
+		}
 		
 		binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener, android.widget.SearchView.OnQueryTextListener {
 			
