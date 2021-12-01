@@ -1,4 +1,4 @@
-package com.zalocoders.twitterapp.ui.home.base
+package com.zalocoders.twitterapp.ui.base
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -18,7 +18,7 @@ class TweetAdapter :
 		@SuppressLint("SetTextI18n")
 		fun bind(item: Tweet) {
 			with(binding) {
-			
+			tweetText.text = item.text
 			}
 		}
 	}
@@ -32,7 +32,6 @@ class TweetAdapter :
 	
 	override fun onBindViewHolder(holder: TweetViewHolder, position: Int) {
 		holder.bind(getItem(position)!!)
-		
 	}
 }
 

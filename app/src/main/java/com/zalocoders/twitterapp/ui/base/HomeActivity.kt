@@ -1,4 +1,4 @@
-package com.zalocoders.twitterapp.ui.home.base
+package com.zalocoders.twitterapp.ui.base
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

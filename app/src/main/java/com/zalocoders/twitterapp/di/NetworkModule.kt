@@ -1,6 +1,6 @@
 package com.zalocoders.twitterapp.di
 
-import androidx.viewbinding.BuildConfig
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.zalocoders.twitterapp.data.api.ApiService
@@ -22,14 +22,16 @@ import javax.inject.Singleton
 object NetworkModule {
     
     private const val BASE_URL = " https://api.twitter.com/2/tweets/search/"
-
+    private const val TIME_OUT = 30
+    
+    
     @Provides
     @Singleton
     fun provideHttpClient(): OkHttpClient {
         val builder = OkHttpClient.Builder()
-                .connectTimeout(30, TimeUnit.SECONDS)
-                .readTimeout(30, TimeUnit.SECONDS)
-                .writeTimeout(30, TimeUnit.SECONDS)
+                .connectTimeout(TIME_OUT.toLong(), TimeUnit.SECONDS)
+                .readTimeout(TIME_OUT.toLong(), TimeUnit.SECONDS)
+                .writeTimeout(TIME_OUT.toLong(), TimeUnit.SECONDS)
                 .protocols(listOf(Protocol.HTTP_2, Protocol.HTTP_1_1))
                 .addInterceptor { chain ->
                     val request = chain.request()
@@ -37,13 +39,13 @@ object NetworkModule {
                             .header("Content-Type", "application/json")
                             .header("Authorization", "Bearer AAAAAAAAAAAAAAAAAAAAAG1fWAEAAAAAHcOKvBVtJVASmxmaFlRvDqNYDhU%3DBMvmmtB2efRlUUJ8hekrPWIraGRRWr3hbdQHAnVjn9tT6FDDxO")
                             .build()
-
                     return@addInterceptor chain.proceed(authRequest)
                 }
                 .addNetworkInterceptor(loggingInterceptor)
         return builder.build()
     }
-
+    
+    
     
     @Singleton
     @Provides
@@ -58,14 +60,12 @@ object NetworkModule {
             .baseUrl(BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(MoshiConverterFactory.create(moshi))
+            .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .build()
 
 
     @Provides
     fun provideApiService(retrofit: Retrofit): ApiService = retrofit.create(ApiService::class.java)
-
-
-  
-
+    
 }
 

@@ -1,9 +1,11 @@
 package com.zalocoders.twitterapp.data.repository.search
 
-import androidx.lifecycle.LiveData
 import androidx.paging.PagingData
+import com.zalocoders.twitterapp.data.model.SearchResponse
 import com.zalocoders.twitterapp.data.model.Tweet
+import kotlinx.coroutines.flow.Flow
 
 interface ISearchRepository{
-	suspend fun searchTweet(query:String): LiveData<PagingData<Tweet>>
+	 fun  searchTweet(query:String): Flow<PagingData<Tweet>>
+	 suspend fun search(query: String):Flow<SearchResponse>
 }

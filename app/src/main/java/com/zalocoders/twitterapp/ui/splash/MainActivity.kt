@@ -4,7 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.zalocoders.twitterapp.databinding.ActivityMainBinding
-import com.zalocoders.twitterapp.ui.home.base.HomeActivity
+import com.zalocoders.twitterapp.ui.base.HomeActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel

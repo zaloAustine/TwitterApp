@@ -4,40 +4,80 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.home.search.SearchFragment">
+    tools:context=".ui.home.HomeFragment">
 
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/queryInput"
-        android:layout_width="0dp"
+    <TextView
+        android:id="@+id/textView"
+        style="@style/TextAppearance.AppCompat.Headline"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="329dp"
-        android:layout_marginBottom="24dp"
-        app:layout_constraintBottom_toTopOf="@+id/searchButton"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="8dp"
+        android:text="@string/search_tweets"
+        android:textColor="@color/colorPrimary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/searchButton"
+    <SearchView
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:queryHint="@string/search"
+        android:background="@drawable/bg_search_grey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/clearRecent"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableEnd="@drawable/bin"
+        android:gravity="center"
+        android:padding="12dp"
+        android:visibility="gone"
+        android:text="@string/clear_recent"
+        android:textColor="@android:color/holo_red_dark"
+        android:textStyle="bold"
+        app:elevation="0dp"
+        app:layout_constraintEnd_toEndOf="@+id/searchView"
+        app:layout_constraintTop_toBottomOf="@+id/searchView"
+        tools:ignore="UseCompatTextViewDrawableXml"
+        tools:targetApi="m" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/tweetRecycleView"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginBottom="274dp"
-        android:text="@string/hello_blank_fragment"
-        android:visibility="visible"
-        app:cornerRadius="34dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/queryInput" />
+        app:layout_constraintTop_toBottomOf="@+id/clearRecent" />
 
-    <ProgressBar
-        android:id="@+id/searchProgress"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/emptyStateView"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        app:layout_constraintEnd_toEndOf="@+id/searchButton"
-        app:layout_constraintStart_toStartOf="@+id/searchButton"
-        app:layout_constraintTop_toTopOf="@+id/searchButton"/>
+        android:gravity="center"
+        android:visibility="gone"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tweetRecycleView"
+        tools:ignore="UseCompoundDrawables">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/twitter"
+            android:contentDescription="@string/search_tweets" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/recent_added_tweets" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

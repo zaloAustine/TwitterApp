@@ -1,4 +1,4 @@
-package com.zalocoders.twitterapp.ui.home.search
+package com.zalocoders.twitterapp.ui.search_results
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,23 +10,22 @@ import com.zalocoders.twitterapp.data.model.Tweet
 import com.zalocoders.twitterapp.data.repository.search.ISearchRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @HiltViewModel
-class SearchViewModel @Inject constructor(
-		private val searchRepository: ISearchRepository
+class SearchResultsViewModel @Inject constructor(
+		private val searchRepository: ISearchRepository,
+
 ) : ViewModel(){
-	
-	private val _isLoading = MutableLiveData<Boolean>()
-	val isLoading: LiveData<Boolean> = _isLoading
 	
 	private var _searchResult = MutableLiveData<PagingData<Tweet>>()
 	val searchResult: LiveData<PagingData<Tweet>> = _searchResult
 	
-	suspend fun searchTweets(query:String){
-		_isLoading.postValue(true)
-		val result = searchRepository.searchTweet(query).cachedIn(viewModelScope)
-		_searchResult.value = result.value
-		_isLoading.postValue(false)
-	}
-	
+	 fun searchTweets(query:String) = viewModelScope.launch(IO) {
+		searchRepository.searchTweet(query).cachedIn(viewModelScope).collectLatest {
+			_searchResult.postValue(it)
+		}
+	 }
 }

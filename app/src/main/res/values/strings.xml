@@ -4,4 +4,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="twitterIcon">twitterIcon</string>
     <string name="twitter_search">Twitter Search</string>
+    <string name="search">search</string>
+    <string name="search_tweets">Search Tweets</string>
+    <string name="recent_added_tweets">recent added tweets will appear here</string>
+    <string name="clear_recent">Clear Recent</string>
 </resources>

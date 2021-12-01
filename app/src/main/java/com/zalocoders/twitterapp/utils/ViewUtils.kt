@@ -10,6 +10,8 @@ import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.fragment.app.Fragment
 import com.google.android.material.chip.Chip
 import com.google.android.material.snackbar.Snackbar
 import com.zalocoders.twitterapp.R
@@ -93,6 +95,10 @@ fun Chip.setChipBackgroundColor(context: Context, color: Int) {
     )
 }
 
+fun Fragment.hideSoftInput(){
+    val inputmethodManager = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    inputmethodManager.hideSoftInputFromWindow(view?.windowToken, 0)
+}
 
 fun Activity.hideSoftInput() {
     val inputmethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
