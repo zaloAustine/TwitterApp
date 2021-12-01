@@ -7,7 +7,10 @@
 
 ## Setup
 -First, create a file keys.properties in your root directory with the values for different secret keys:
+
 TWITTER_BEARER_TOKEN = AAAAAAAAAAAAAAAAAAAAAG1fWAEAAAAAHcOKvBVtJVASmxmaFlRvDqNYDhU%3DBMvmmtB2efRlUUJ8hekrPWIraGRRWr3hbdQHAnVjn9tT6FDDxO
+
+
 - Build the project
 
 <table>
