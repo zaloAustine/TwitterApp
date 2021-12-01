@@ -26,16 +26,16 @@ xmlns:android="http://schemas.android.com/apk/res/android">
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Tweet description" />
 
-    <com.google.android.material.button.MaterialButton
+    <TextView
         android:id="@+id/btnAddToRecent"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAllCaps="false"
         android:text="@string/add_to_recent"
-        android:drawableEnd="@drawable/favourite"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:drawableEndCompat="@drawable/favourite" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
