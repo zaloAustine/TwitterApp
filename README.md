@@ -1,5 +1,5 @@
 # Twitter search App
-* Enable user to Search and save Recent a tweets from tweeter Api
+* Enable user to Search and save Recent tweets from tweeter Api
 
 ## PreRequisities
 
