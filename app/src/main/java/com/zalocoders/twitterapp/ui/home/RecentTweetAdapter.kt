@@ -1,4 +1,4 @@
-package com.zalocoders.twitterapp.ui.search_results
+package com.zalocoders.twitterapp.ui.home
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater

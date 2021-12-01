@@ -9,12 +9,9 @@ class RecentTweetsRepository @Inject constructor(
 		private val tweetsDao: TweetsDao
 ) {
 	
-	suspend fun insertTweet(tweet: RecentTweetEntity) = tweetsDao.insertTweet(tweet)
-	
 	fun getAllTweets(): LiveData<List<RecentTweetEntity>> = tweetsDao.getAllTweets()
 	
 	suspend fun deleteAllTweet() = tweetsDao.deleteAllTweet()
 	
-	suspend fun deleteTweet(id:String) = tweetsDao.deleteTweet(id)
 	
 }

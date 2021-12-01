@@ -7,14 +7,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.zalocoders.twitterapp.databinding.FragmentSearchBinding
 import com.zalocoders.twitterapp.ui.search_results.RecentTweetAdapter
 import com.zalocoders.twitterapp.utils.hide
 import com.zalocoders.twitterapp.utils.hideSoftInput
 import com.zalocoders.twitterapp.utils.show
 import com.zalocoders.twitterapp.utils.showErrorSnackbar
+import com.zalocoders.twitterapp.utils.showSuccessSnackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -34,6 +37,8 @@ class HomeFragment : Fragment() {
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 		
+		initViews()
+		
 		recentTweetAdapter = RecentTweetAdapter()
 		
 		setUpSearch()
@@ -42,10 +47,15 @@ class HomeFragment : Fragment() {
 		searchCloseListener()
 	}
 	
+	private fun initViews(){
+		binding.clearRecent.setOnClickListener {
+			clearRecentTweets()
+		}
+	}
+	
 	private fun setUpSearch(){
 		
 		binding.searchView.isIconified = false
-		hideSoftInput()
 		
 		binding.searchView.setOnClickListener{
 			binding.searchView.onActionViewExpanded()
@@ -63,7 +73,6 @@ class HomeFragment : Fragment() {
 					navigateToResult(query)
 				}else{
 					binding.root.showErrorSnackbar("Enter valid Name")
-					
 				}
 				hideSoftInput()
 				return true
@@ -105,6 +114,16 @@ class HomeFragment : Fragment() {
 	private fun navigateToResult(queryString:String){
 		val action = HomeFragmentDirections.actionSearchFragmentToResultFragment(queryString)
 		findNavController().navigate(action)
+	}
+	
+	private fun clearRecentTweets(){
+		lifecycleScope.launchWhenStarted {
+			homeViewModel.deleteAllTweet().observe(viewLifecycleOwner,{
+				if(it != null){
+					binding.root.showSuccessSnackbar("Recent Tweets Cleared",Snackbar.LENGTH_LONG)
+				}
+			})
+		}
 	}
 	
 }

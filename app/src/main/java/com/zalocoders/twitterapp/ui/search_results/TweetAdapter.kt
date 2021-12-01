@@ -1,4 +1,4 @@
-package com.zalocoders.twitterapp.ui.base
+package com.zalocoders.twitterapp.ui.search_results
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -10,7 +10,7 @@ import com.zalocoders.twitterapp.data.model.Tweet
 import com.zalocoders.twitterapp.databinding.TweetItemBinding
 
 
-class TweetAdapter :
+class TweetAdapter(private val tweetClickListener: TweetClickListener) :
 		PagingDataAdapter<Tweet, TweetAdapter.TweetViewHolder>(diffUtil) {
 	inner class TweetViewHolder(private val binding: TweetItemBinding) :
 			RecyclerView.ViewHolder(binding.root) {
@@ -19,6 +19,10 @@ class TweetAdapter :
 		fun bind(item: Tweet) {
 			with(binding) {
 			tweetText.text = item.text
+			}
+			
+			binding.root.setOnClickListener {
+				tweetClickListener.insertTweet(item)
 			}
 		}
 	}
@@ -43,4 +47,9 @@ val diffUtil = object : DiffUtil.ItemCallback<Tweet>() {
 	override fun areContentsTheSame(oldItem: Tweet, newItem: Tweet): Boolean {
 		return oldItem == newItem
 	}
+}
+
+interface TweetClickListener {
+	fun insertTweet(item:Tweet)
+	fun deleteTweet(item:Tweet)
 }

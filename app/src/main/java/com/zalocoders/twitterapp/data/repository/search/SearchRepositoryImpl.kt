@@ -7,6 +7,8 @@ import androidx.paging.PagingData
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.zalocoders.twitterapp.data.api.ApiService
+import com.zalocoders.twitterapp.data.db.entities.RecentTweetEntity
+import com.zalocoders.twitterapp.data.db.tweet.TweetsDao
 import com.zalocoders.twitterapp.data.model.Tweet
 import java.io.IOException
 import javax.inject.Inject
@@ -15,7 +17,8 @@ import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
 
 class SearchRepositoryImpl @Inject constructor(
-		private val apiService: ApiService
+		private val apiService: ApiService,
+		private val tweetsDao: TweetsDao
 ):ISearchRepository{
 	
 	override fun searchTweet(query:String): Flow<PagingData<Tweet>> {
@@ -31,6 +34,10 @@ class SearchRepositoryImpl @Inject constructor(
 	override suspend fun search(query: String) = flow{
 		emit(apiService.searchTweets(query))
 	}
+	
+	override suspend fun deleteTweet(id:String) = tweetsDao.deleteTweet(id)
+	
+	override suspend fun insertTweet(tweet: RecentTweetEntity) = tweetsDao.insertTweet(tweet)
 	
 }
 

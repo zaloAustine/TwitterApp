@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.zalocoders.twitterapp.data.db.entities.RecentTweetEntity
 import com.zalocoders.twitterapp.data.model.Tweet
 import com.zalocoders.twitterapp.data.repository.search.ISearchRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -28,4 +29,9 @@ class SearchResultsViewModel @Inject constructor(
 			_searchResult.postValue(it)
 		}
 	 }
+	
+	 fun deleteTweet(id:String) = searchRepository.deleteTweet(id)
+	
+	 fun insertTweet(tweet: RecentTweetEntity) = searchRepository.insertTweet(tweet)
+	
 }

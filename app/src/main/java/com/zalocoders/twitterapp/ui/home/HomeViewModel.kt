@@ -12,11 +12,8 @@ class HomeViewModel @Inject constructor(
 		private var recentTweetsRepository: RecentTweetsRepository
 ):ViewModel() {
 	
-	suspend fun insertTweet(tweet: RecentTweetEntity) = recentTweetsRepository.insertTweet(tweet)
-	
 	fun getAllTweets(): LiveData<List<RecentTweetEntity>> = recentTweetsRepository.getAllTweets()
 	
 	suspend fun deleteAllTweet() = recentTweetsRepository.deleteAllTweet()
 	
-	suspend fun deleteTweet(id:String) = recentTweetsRepository.deleteTweet(id)
 }

@@ -5,19 +5,24 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
+import com.zalocoders.twitterapp.data.db.entities.toRecentTweetEntity
+import com.zalocoders.twitterapp.data.model.Tweet
 import com.zalocoders.twitterapp.databinding.FragmentResultBinding
-import com.zalocoders.twitterapp.ui.base.TweetAdapter
+import com.zalocoders.twitterapp.utils.hide
 import com.zalocoders.twitterapp.utils.hideSoftInput
+import com.zalocoders.twitterapp.utils.show
+import com.zalocoders.twitterapp.utils.showErrorSnackbar
+import com.zalocoders.twitterapp.utils.showSnackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ResultFragment : Fragment() {
+class ResultFragment : Fragment(),TweetClickListener {
 	
 	private val binding:FragmentResultBinding by lazy {
 		FragmentResultBinding.inflate(layoutInflater)
@@ -36,7 +41,7 @@ class ResultFragment : Fragment() {
 		
 		search(navArgs.query)
 		
-		tweetAdapter = TweetAdapter()
+		tweetAdapter = TweetAdapter(this)
 		
 		setUpRecyclerView()
 		setUpLoading()
@@ -65,10 +70,10 @@ class ResultFragment : Fragment() {
 			
 			
 			if (loadState.refresh is LoadState.Loading){
-				binding.progressBar.visibility = View.VISIBLE
+				binding.progressView.show()
 			}
 			else{
-				binding.progressBar.visibility = View.GONE
+				binding.progressView.hide()
 				val error = when {
 					loadState.prepend is LoadState.Error -> loadState.prepend as LoadState.Error
 					loadState.append is LoadState.Error -> loadState.append as LoadState.Error
@@ -76,7 +81,7 @@ class ResultFragment : Fragment() {
 					else -> null
 				}
 				error?.let {
-					Toast.makeText(context, it.error.message, Toast.LENGTH_LONG).show()
+					binding.root.showErrorSnackbar(it.error.message.toString(),Snackbar.LENGTH_LONG)
 				}
 			}
 		}
@@ -87,6 +92,22 @@ class ResultFragment : Fragment() {
 			tweetAdapter.submitData(lifecycle,it)
 		})
 		
+	}
+	
+	override fun insertTweet(item: Tweet) {
+	viewModel.insertTweet(item.toRecentTweetEntity()).observe(viewLifecycleOwner,{
+		if(it != null){
+			binding.root.showSnackbar("Added Successfully",Snackbar.LENGTH_LONG)
+		}
+	})
+	}
+	
+	override fun deleteTweet(item: Tweet) {
+		viewModel.deleteTweet(item.id).observe(viewLifecycleOwner,{
+			if(it != null){
+				binding.root.showSnackbar("Deleted Successfully",Snackbar.LENGTH_LONG)
+			}
+		})
 	}
 	
 }
