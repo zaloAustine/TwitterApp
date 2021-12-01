@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
@@ -16,12 +15,13 @@ import com.zalocoders.twitterapp.utils.hide
 import com.zalocoders.twitterapp.utils.hideSoftInput
 import com.zalocoders.twitterapp.utils.show
 import com.zalocoders.twitterapp.utils.showErrorSnackbar
+import com.zalocoders.twitterapp.utils.showSnackbar
 import com.zalocoders.twitterapp.utils.showSuccessSnackbar
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
+
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(),RecentTweetClickListener {
 	
 	private val homeViewModel:HomeViewModel by viewModels()
 	
@@ -39,7 +39,7 @@ class HomeFragment : Fragment() {
 		
 		initViews()
 		
-		recentTweetAdapter = RecentTweetAdapter()
+		recentTweetAdapter = RecentTweetAdapter(this)
 		
 		setUpSearch()
 		setRecentUpRecyclerView()
@@ -124,4 +124,9 @@ class HomeFragment : Fragment() {
 			homeViewModel.deleteAllTweet()
 			binding.root.showSuccessSnackbar("Recent Tweets Cleared",Snackbar.LENGTH_LONG)
 		}
+	
+	override fun deleteTweet(id: String) {
+		homeViewModel.deleteTweet(id)
+		binding.root.showSnackbar("Delete Successfully",Snackbar.LENGTH_LONG)
+	}
 }

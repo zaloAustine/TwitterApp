@@ -7,12 +7,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.zalocoders.twitterapp.data.db.entities.RecentTweetEntity
-import com.zalocoders.twitterapp.databinding.TweetItemBinding
+import com.zalocoders.twitterapp.databinding.RecentTweetItemBinding
 
 
-class RecentTweetAdapter :
+class RecentTweetAdapter(private val recentTweetClickListener: RecentTweetClickListener):
 		ListAdapter<RecentTweetEntity, RecentTweetAdapter.RecentTweetViewHolder>(diffUtil) {
-	inner class RecentTweetViewHolder(private val binding: TweetItemBinding) :
+	inner class RecentTweetViewHolder(private val binding: RecentTweetItemBinding) :
 			RecyclerView.ViewHolder(binding.root) {
 		
 		@SuppressLint("SetTextI18n")
@@ -20,12 +20,16 @@ class RecentTweetAdapter :
 			with(binding) {
 			tweetText.text = item.tweet_desc
 			}
+			
+			binding.tweetText.setOnClickListener {
+				recentTweetClickListener.deleteTweet(item.tweet_id)
+			}
 		}
 	}
 	
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecentTweetViewHolder =
 			RecentTweetViewHolder(
-					TweetItemBinding.inflate(
+					RecentTweetItemBinding.inflate(
 							LayoutInflater.from(parent.context), parent, false
 					)
 			)
@@ -43,4 +47,7 @@ val diffUtil = object : DiffUtil.ItemCallback<RecentTweetEntity>() {
 	override fun areContentsTheSame(oldItem: RecentTweetEntity, newItem: RecentTweetEntity): Boolean {
 		return oldItem == newItem
 	}
+}
+interface RecentTweetClickListener {
+	fun deleteTweet(id:String)
 }

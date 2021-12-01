@@ -31,11 +31,6 @@ class SearchResultsViewModel @Inject constructor(
 		}
 	 }
 	
-	  fun deleteTweet(id:String){
-	 	viewModelScope.launch(IO) {
-			searchRepository.deleteTweet(id)
-		}
-	 }
 	
 	  fun insertTweet(tweet: RecentTweetEntity){
 	 	viewModelScope.launch(IO) {

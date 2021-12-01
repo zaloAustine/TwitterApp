@@ -13,5 +13,6 @@ class RecentTweetsRepository @Inject constructor(
 	
 	suspend fun deleteAllTweet() = tweetsDao.deleteAllTweet()
 	
+	suspend fun deleteTweet(id:String) = tweetsDao.deleteTweet(id)
 	
 }

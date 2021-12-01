@@ -23,4 +23,10 @@ class HomeViewModel @Inject constructor(
 		}
 	}
 	
+	fun deleteTweet(id:String){
+		viewModelScope.launch(IO) {
+			recentTweetsRepository.deleteTweet(id)
+		}
+	}
+	
 }

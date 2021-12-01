@@ -98,8 +98,4 @@ class ResultFragment : Fragment(),TweetClickListener {
 			binding.root.showSnackbar("Added Successfully",Snackbar.LENGTH_LONG)
 	}
 	
-	override fun deleteTweet(item: Tweet) {
-			viewModel.deleteTweet(item.id)
-			binding.root.showSnackbar("Delete Successfully",Snackbar.LENGTH_LONG)
-	}
 }

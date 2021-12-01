@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.zalocoders.twitterapp.data.model.Tweet
 import com.zalocoders.twitterapp.databinding.TweetItemBinding
+import com.zalocoders.twitterapp.utils.hide
 
 
 class TweetAdapter(private val tweetClickListener: TweetClickListener) :
@@ -21,8 +22,9 @@ class TweetAdapter(private val tweetClickListener: TweetClickListener) :
 			tweetText.text = item.text
 			}
 			
-			binding.root.setOnClickListener {
+			binding.btnAddToRecent.setOnClickListener {
 				tweetClickListener.insertTweet(item)
+				binding.btnAddToRecent.hide()
 			}
 		}
 	}
@@ -51,5 +53,4 @@ val diffUtil = object : DiffUtil.ItemCallback<Tweet>() {
 
 interface TweetClickListener {
 	fun insertTweet(item:Tweet)
-	fun deleteTweet(item:Tweet)
 }
