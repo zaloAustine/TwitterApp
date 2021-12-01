@@ -3,12 +3,10 @@ package com.zalocoders.twitterapp.ui.home
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.zalocoders.twitterapp.data.db.entities.RecentTweetEntity
-import com.zalocoders.twitterapp.data.model.Tweet
 import com.zalocoders.twitterapp.databinding.TweetItemBinding
 
 
@@ -20,7 +18,7 @@ class RecentTweetAdapter :
 		@SuppressLint("SetTextI18n")
 		fun bind(item: RecentTweetEntity) {
 			with(binding) {
-			tweetText.text = item.tweet_id
+			tweetText.text = item.tweet_desc
 			}
 		}
 	}

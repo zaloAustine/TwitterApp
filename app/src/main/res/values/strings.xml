@@ -9,4 +9,5 @@
     <string name="recent_added_tweets">recent added tweets will appear here</string>
     <string name="clear_recent">Clear Recent</string>
     <string name="search_desc">getting tweets please wait...</string>
+    <string name="recent_tweets_title">Recent Tweets</string>
 </resources>

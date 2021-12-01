@@ -8,17 +8,20 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object DatabaseModule {
 	
+	@Singleton
 	@Provides
 	fun provideTwitterDatabase(@ApplicationContext context: Context) =
-			Room.databaseBuilder(context, TwitterDatabase::class.java, "reddit_db")
+			Room.databaseBuilder(context, TwitterDatabase::class.java, "twitter_db")
 					.fallbackToDestructiveMigration()
 					.build()
 	
+	@Singleton
 	@Provides
 	fun provideTwitterDao(database: TwitterDatabase) = database.tweetsDao()
 

@@ -26,7 +26,7 @@
         android:drawableEnd="@drawable/bin"
         android:gravity="center"
         android:padding="12dp"
-        android:visibility="gone"
+        android:visibility="visible"
         android:text="@string/clear_recent"
         android:textColor="@android:color/holo_red_dark"
         android:textStyle="bold"
@@ -36,6 +36,18 @@
         tools:ignore="UseCompatTextViewDrawableXml"
         tools:targetApi="m" />
 
+    <TextView
+        android:id="@+id/recentTweetsTitle"
+        android:layout_marginTop="8dp"
+        style="@style/TextAppearance.AppCompat.Medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="@string/recent_tweets_title"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/searchView"
+        app:layout_constraintTop_toBottomOf="@+id/clearRecent" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/tweetRecycleView"
         android:layout_width="match_parent"
@@ -43,7 +55,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/clearRecent" />
+        app:layout_constraintTop_toBottomOf="@+id/recentTweetsTitle" />
 
     <LinearLayout
         android:id="@+id/emptyStateView"

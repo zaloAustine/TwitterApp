@@ -91,23 +91,15 @@ class ResultFragment : Fragment(),TweetClickListener {
 		viewModel.searchResult.observe(viewLifecycleOwner,{
 			tweetAdapter.submitData(lifecycle,it)
 		})
-		
 	}
 	
 	override fun insertTweet(item: Tweet) {
-	viewModel.insertTweet(item.toRecentTweetEntity()).observe(viewLifecycleOwner,{
-		if(it != null){
+			viewModel.insertTweet(item.toRecentTweetEntity())
 			binding.root.showSnackbar("Added Successfully",Snackbar.LENGTH_LONG)
-		}
-	})
 	}
 	
 	override fun deleteTweet(item: Tweet) {
-		viewModel.deleteTweet(item.id).observe(viewLifecycleOwner,{
-			if(it != null){
-				binding.root.showSnackbar("Deleted Successfully",Snackbar.LENGTH_LONG)
-			}
-		})
+			viewModel.deleteTweet(item.id)
+			binding.root.showSnackbar("Delete Successfully",Snackbar.LENGTH_LONG)
 	}
-	
 }

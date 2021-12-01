@@ -11,6 +11,7 @@ import com.zalocoders.twitterapp.data.model.Tweet
 import com.zalocoders.twitterapp.data.repository.search.ISearchRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -30,8 +31,16 @@ class SearchResultsViewModel @Inject constructor(
 		}
 	 }
 	
-	 fun deleteTweet(id:String) = searchRepository.deleteTweet(id)
+	  fun deleteTweet(id:String){
+	 	viewModelScope.launch(IO) {
+			searchRepository.deleteTweet(id)
+		}
+	 }
 	
-	 fun insertTweet(tweet: RecentTweetEntity) = searchRepository.insertTweet(tweet)
+	  fun insertTweet(tweet: RecentTweetEntity){
+	 	viewModelScope.launch(IO) {
+			searchRepository.insertTweet(tweet)
+		}
+	 }
 	
 }

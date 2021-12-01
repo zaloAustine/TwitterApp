@@ -12,14 +12,14 @@ import com.zalocoders.twitterapp.data.db.entities.RecentTweetEntity
 interface TweetsDao {
 	
 	@Insert(onConflict = OnConflictStrategy.REPLACE)
-	fun insertTweet(tweet: RecentTweetEntity):LiveData<Long>
+	suspend fun insertTweet(tweet: RecentTweetEntity):Long
 	
 	@Query("SELECT * FROM recent_tweets")
 	fun getAllTweets(): LiveData<List<RecentTweetEntity>>
 	
 	@Query("DELETE FROM recent_tweets")
-	fun deleteAllTweet():LiveData<Int>
+	suspend fun deleteAllTweet():Int
 	
 	@Query("DELETE FROM recent_tweets WHERE tweet_id = :id")
-	 fun deleteTweet(id:String):LiveData<Int>
+	suspend fun deleteTweet(id:String):Int
 }

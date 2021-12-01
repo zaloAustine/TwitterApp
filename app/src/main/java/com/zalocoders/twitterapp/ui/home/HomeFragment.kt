@@ -12,13 +12,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.zalocoders.twitterapp.databinding.FragmentSearchBinding
-import com.zalocoders.twitterapp.ui.search_results.RecentTweetAdapter
 import com.zalocoders.twitterapp.utils.hide
 import com.zalocoders.twitterapp.utils.hideSoftInput
 import com.zalocoders.twitterapp.utils.show
 import com.zalocoders.twitterapp.utils.showErrorSnackbar
 import com.zalocoders.twitterapp.utils.showSuccessSnackbar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -99,14 +99,18 @@ class HomeFragment : Fragment() {
 	
 	private fun getRecentTweets(){
 			homeViewModel.getAllTweets().observe(viewLifecycleOwner,{
-				if(it.isNotEmpty()){
+				
 				recentTweetAdapter.submitList(it)
+				
+				if(it.isNotEmpty()){
 					binding.clearRecent.show()
+					binding.emptyStateView.hide()
+					binding.recentTweetsTitle.show()
 				}else{
 					//show empty state
 					binding.emptyStateView.show()
 					binding.clearRecent.hide()
-					
+					binding.recentTweetsTitle.hide()
 				}
 			})
 	}
@@ -117,13 +121,7 @@ class HomeFragment : Fragment() {
 	}
 	
 	private fun clearRecentTweets(){
-		lifecycleScope.launchWhenStarted {
-			homeViewModel.deleteAllTweet().observe(viewLifecycleOwner,{
-				if(it != null){
-					binding.root.showSuccessSnackbar("Recent Tweets Cleared",Snackbar.LENGTH_LONG)
-				}
-			})
+			homeViewModel.deleteAllTweet()
+			binding.root.showSuccessSnackbar("Recent Tweets Cleared",Snackbar.LENGTH_LONG)
 		}
-	}
-	
 }
