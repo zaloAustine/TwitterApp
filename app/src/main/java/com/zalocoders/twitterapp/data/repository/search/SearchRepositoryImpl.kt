@@ -1,6 +1,5 @@
 package com.zalocoders.twitterapp.data.repository.search
 
-import android.util.Log
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
@@ -13,7 +12,6 @@ import com.zalocoders.twitterapp.data.model.Tweet
 import java.io.IOException
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
 
 class SearchRepositoryImpl @Inject constructor(
@@ -29,10 +27,6 @@ class SearchRepositoryImpl @Inject constructor(
 				),
 				pagingSourceFactory = { SearchDataSource(apiService, query) }
 		).flow
-	}
-	
-	override suspend fun search(query: String) = flow{
-		emit(apiService.searchTweets(query))
 	}
 	
 	override suspend fun deleteTweet(id:String) = tweetsDao.deleteTweet(id)
@@ -57,25 +51,20 @@ class SearchDataSource(
 	}
 	
 	override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Tweet> {
-		val position = params.key ?: 1
 		
 		return try  {
+			val position = params.key ?: 1
+			
 			val response = apiService.searchTweets(query)
 			
-			val nextKey = if (response.data.isEmpty()) {
-				null
-			} else {
-				// initial load size = 3 * NETWORK_PAGE_SIZE
-				// ensure we're not requesting duplicating items, at the 2nd request
-				position + (params.loadSize / 3)
-			}
+			val nextKey = if (response.data.isNotEmpty()) position + 1 else null
 			
 			LoadResult.Page(
 					data = response.data,
 					prevKey = if (position == 1) null else position - 1,
 					nextKey = nextKey
 			)
-		}catch (exception: IOException) {
+		}catch (exception: Exception) {
 			return LoadResult.Error(exception)
 		} catch (exception: HttpException) {
 			return LoadResult.Error(exception)
