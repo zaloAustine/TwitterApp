@@ -106,7 +106,7 @@ fun Activity.getView(): View {
 
 
 fun View.showRetrySnackBar(message: String, action: ((View) -> Unit)?) {
-    val snackBar = Snackbar.make(this, message, Snackbar.LENGTH_INDEFINITE)
+    val snackBar = Snackbar.make(this, message, Snackbar.LENGTH_LONG)
 
     snackBar.apply {
         this.setBackgroundTint(ContextCompat.getColor(this.context, android.R.color.holo_red_light))

@@ -11,7 +11,6 @@ import com.zalocoders.twitterapp.data.db.tweet.TweetsDao
 import com.zalocoders.twitterapp.data.model.Tweet
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
-import retrofit2.HttpException
 
 class SearchRepositoryImpl @Inject constructor(
 		private val apiService: ApiService,
@@ -64,10 +63,7 @@ class SearchDataSource(
 					nextKey = nextKey
 			)
 		}catch (exception: Exception) {
-			return LoadResult.Error(exception)
-		} catch (exception: HttpException) {
 			return LoadResult.Error(Throwable("Check your internet"))
 		}
 	}
-	
 }
