@@ -7,7 +7,6 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.zalocoders.twitterapp.R
 import com.zalocoders.twitterapp.databinding.ActivityHomeBinding
-import com.zalocoders.twitterapp.utils.makeStatusBarTransparent
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

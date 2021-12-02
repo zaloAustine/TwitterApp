@@ -9,7 +9,6 @@ import com.zalocoders.twitterapp.data.api.ApiService
 import com.zalocoders.twitterapp.data.db.entities.RecentTweetEntity
 import com.zalocoders.twitterapp.data.db.tweet.TweetsDao
 import com.zalocoders.twitterapp.data.model.Tweet
-import java.io.IOException
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import retrofit2.HttpException
