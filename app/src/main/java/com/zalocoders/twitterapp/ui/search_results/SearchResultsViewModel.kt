@@ -11,7 +11,6 @@ import com.zalocoders.twitterapp.data.model.Tweet
 import com.zalocoders.twitterapp.data.repository.search.ISearchRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -30,7 +29,6 @@ class SearchResultsViewModel @Inject constructor(
 			_searchResult.postValue(it)
 		}
 	 }
-	
 	
 	  fun insertTweet(tweet: RecentTweetEntity){
 	 	viewModelScope.launch(IO) {
