@@ -15,6 +15,6 @@ class RecentTweetsRepository @Inject constructor(
 	
 	suspend fun deleteTweet(id:String) = tweetsDao.deleteTweet(id)
 	
-	 suspend fun insertTweet(tweet: RecentTweetEntity) = tweetsDao.insertTweet(tweet)
+	suspend fun insertTweet(tweet: RecentTweetEntity) = tweetsDao.insertTweet(tweet)
 	
 }

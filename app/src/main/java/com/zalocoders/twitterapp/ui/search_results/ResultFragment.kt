@@ -18,6 +18,7 @@ import com.zalocoders.twitterapp.utils.hide
 import com.zalocoders.twitterapp.utils.hideSoftInput
 import com.zalocoders.twitterapp.utils.show
 import com.zalocoders.twitterapp.utils.showErrorSnackbar
+import com.zalocoders.twitterapp.utils.showRetrySnackBar
 import com.zalocoders.twitterapp.utils.showSnackbar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -81,7 +82,9 @@ class ResultFragment : Fragment(),TweetClickListener {
 					else -> null
 				}
 				error?.let {
-					binding.root.showErrorSnackbar(it.error.message.toString(),Snackbar.LENGTH_LONG)
+					binding.root.showRetrySnackBar(it.error.message.toString()) {
+						search(navArgs.query)
+					}
 				}
 			}
 		}

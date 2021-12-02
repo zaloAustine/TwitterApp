@@ -24,7 +24,7 @@ open class RequestDispatcher : Dispatcher() {
 	}
 	
 	
-	fun getJson(path: String): String {
+	private fun getJson(path: String): String {
 		val uri = Resources.getResource(path)
 		val file = File(uri.path)
 		

@@ -66,7 +66,7 @@ class SearchDataSource(
 		}catch (exception: Exception) {
 			return LoadResult.Error(exception)
 		} catch (exception: HttpException) {
-			return LoadResult.Error(exception)
+			return LoadResult.Error(Throwable("Check your internet"))
 		}
 	}
 	
