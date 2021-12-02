@@ -3,7 +3,7 @@
 
 ## PreRequisities
 
-- [A valid Tweeter Bearer Token](https://developer.twitter.com/en/docs/twitter-api/getting-started/getting-access-to-the-twitter-api)
+- [A valid Twitter Bearer Token](https://developer.twitter.com/en/docs/twitter-api/getting-started/getting-access-to-the-twitter-api)
 
 ## Setup
 -First, create a file keys.properties in your root directory with the values for different secret keys:
@@ -61,8 +61,6 @@ TWITTER_BEARER_TOKEN = AAAAAAAAAAAAAAAAAAAAAG1fWAEAAAAAHcOKvBVtJVASmxmaFlRvDqNYD
 * CI/CD
     * Github Actions
     
-<img  width="200" height="400" src="./screenshort/8.png"/>
-
 * Tests
     * [Unit Tests](https://en.wikipedia.org/wiki/Unit_testing) ([JUnit](https://junit.org/junit4/)) - a simple framework to write repeatable tests.
     * [MockK](https://github.com/mockk) - mocking library for Kotlin
