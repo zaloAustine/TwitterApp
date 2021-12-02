@@ -21,7 +21,6 @@ open class RequestDispatcher : Dispatcher() {
 				throw IllegalArgumentException("Unknown path ${request.path}")
 			}
 		}
-		
 	}
 	
 	

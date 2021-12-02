@@ -1,11 +1,14 @@
 package com.zalocoders.twitterapp.data.repository.search
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.paging.PagingSource
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.google.common.io.Resources
 import com.google.common.truth.Truth
 import com.zalocoders.twitterapp.base.BaseTest
-import com.zalocoders.twitterapp.base.getValueBlocking
-import com.zalocoders.twitterapp.data.db.entities.RecentTweetEntity
+import com.zalocoders.twitterapp.base.convertJsonStringToObject
+import com.zalocoders.twitterapp.data.model.SearchResponse
+import java.io.File
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -21,6 +24,7 @@ class SearchRepositoryImplTest:BaseTest(){
 	@get:Rule
 	var instantTaskExecutorRule = InstantTaskExecutorRule()
 	
+	
 	@ExperimentalCoroutinesApi
 	@Before
 	override fun setup() {
@@ -30,13 +34,32 @@ class SearchRepositoryImplTest:BaseTest(){
 	
 	
 	@Test
-	fun `test getting tweets from DB`() {
+	fun `test searching with pagination`() {
 		runBlocking {
-			val tweet = RecentTweetEntity("1", "test")
-			recentTweetsRepository.insertTweet(tweet)
-			val allTweets = recentTweetsRepository.getAllTweets()
-			Truth.assertThat(allTweets.getValueBlocking()?.get(0)).isEqualTo(tweet)
+			
+			val tweetArray = convertJsonStringToObject(getJson("json/response.json"),SearchResponse::class.java)
+			
+			val pagingSource = SearchDataSource(apiService,"test")
+			
+			Truth.assertThat(
+					pagingSource.load(
+							PagingSource.LoadParams.Refresh(
+									key = null,
+									loadSize = 1,
+									placeholdersEnabled = false
+							)
+			)).isEqualTo(PagingSource.LoadResult.Page(
+					data = listOf(tweetArray.data[0],tweetArray.data[1]),
+					prevKey = null,
+					nextKey = 2
+			))
+			
 		}
 	}
 	
+	private fun getJson(path: String): String {
+		val uri = Resources.getResource(path)
+		val file = File(uri.path)
+		return String(file.readBytes())
+	}
 }

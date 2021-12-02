@@ -60,7 +60,16 @@ TWITTER_BEARER_TOKEN = AAAAAAAAAAAAAAAAAAAAAG1fWAEAAAAAHcOKvBVtJVASmxmaFlRvDqNYD
 
 * CI/CD
     * Github Actions
-    
+
+<table>
+<tr>
+<td>
+<img  width="200" height="400" src="./screenshort/8.png"/>
+</td>
+</tr>
+<table>
+
+
 * Tests
     * [Unit Tests](https://en.wikipedia.org/wiki/Unit_testing) ([JUnit](https://junit.org/junit4/)) - a simple framework to write repeatable tests.
     * [MockK](https://github.com/mockk) - mocking library for Kotlin
