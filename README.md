@@ -63,9 +63,7 @@ TWITTER_BEARER_TOKEN = AAAAAAAAAAAAAAAAAAAAAG1fWAEAAAAAHcOKvBVtJVASmxmaFlRvDqNYD
 
 <table>
 <tr>
-<td>
 <img  width="200" height="400" src="./screenshort/8.png"/>
-</td>
 </tr>
 <table>
 
